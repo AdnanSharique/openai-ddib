@@ -4,7 +4,7 @@
 
 Azure OpenAI Service offers large-scale generative AI models with a deep understanding of language to enable new reasoning and comprehension capabilities for building cutting-edge applications. These models can be applied to a variety of use cases, such as writing assistance, code generation, and reasoning over data. You can also detect and mitigate harmful use of AI with built-in responsible AI and access enterprise-grade Azure security.
 
-In this demo, you will see the Azure OpenAI Service based assistant for Enterprise Data Demo, in action. This will be followed by a generated Social Media Campaign Recommendation demo using DALL-E 2, Florence and Azure OpenAI Service. And finally, you will see text summarization in a contact center scenario using Azure OpenAI with Speech Service.
+In this demo, you will see the Azure OpenAI Service based assistant for Enterprise Data in action. This will be followed by an AI - generated Social Media Campaign Recommendation demo using DALL-E 2, Florence and Azure OpenAI Service. And finally, you will see text summarization in a contact center scenario using Azure OpenAI with Speech Service.
 
 ## Products and Technologies showcased:
 
@@ -16,7 +16,7 @@ In this demo, you will see the Azure OpenAI Service based assistant for Enterpri
     
     •	With Azure OpenAI, customers get the security capabilities of Microsoft Azure while running the same models as OpenAI. Azure OpenAI offers private networking, regional availability, and responsible AI content filtering.
 
-2.	DALL.E2
+2.	DALL.E 2
 
     •	DALL·E 2 is an AI system that can create original, realistic images and art from a text description in natural language. It can combine concepts, attributes, and styles. 
     
@@ -32,11 +32,11 @@ You have multiple options to execute this demo:
 
 -   [Running everything locally in Python using Postman](#running-everything-locally-in-python-using-postman)
 
-    -   [Pdf Indexer](#pdf-indexer)
+    -   [PDF Indexer](#pdf-indexer)
     -   [Search Horizontal](#search-horizontal)
     -   [Campaign Generation](#campaign-generation)
     -   [Recommend Image](#recommend-image)
-    -   [Regenerate DALL E](#regenerate-dall-e)
+    -   [Regenerate DALL-E](#regenerate-dall-e)
 
 -   [Execution through Web App](#execution-through-web-app)
 
@@ -66,28 +66,26 @@ You have multiple options to execute this demo:
 
 **General steps to locally run and test the function_app.py**
 
-1. **Open** the code in Visual Studio and Create an azure function using the V2 programming model in visual studio code and open the build.
+1. **Open** the shared code repository in Visual Studio. -create an Azure function using the V2 programming model in Visual Studio Code and -Open the build.
 
   ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img11.png)
 
-2. **Run**  the "function_app.py" code in visual studio using the command **func start** or **fn+F5** and click **enter**.
+2. **Run**  the "function_app.py" code in Visual Studio using the command **func start** or **fn+F5** and click **enter**.
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_2.png)
 
 3. **Copy** the chat URL generated in the terminal (as indicated by the red box in this example). 
 
-```
-a. http://localhost:7071/api/chat  - This URL will be used to test "Search Horizontal Function App".
+a. *http://localhost:7071/api/chat*  - This URL is used to test "Search Horizontal Function App".
 
-b. http://localhost:7071/api/pdfindexer  - This URL will be used to test "Pdf Indexer Function App".
+b. *http://localhost:7071/api/pdfindexer*  - Use this URL to test "PDF Indexer Function App".
 
-c. http://localhost:7071/api/CampGen  - This URL can be used to test Campaign Generation Function APP
+c. *http://localhost:7071/api/CampGen*  - Use this URL to test "Campaign Generation Function App".
 
-d. http://localhost:7071/api/recommendFromImage_V2 - This URL can be used to test Recommendations from Images Function APP
+d. *http://localhost:7071/api/recommendFromImage_V2* - Use this URL to test "Recommendations from Images Function App".
 
-e. http://localhost:7071/api/dalleimage_generation - This URL can be used to test Generation of Images using Function APP 
+e. *http://localhost:7071/api/dalleimage_generation* - Use this URL to test "Generation of Images using Function App". 
 
-```
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_3.png)
 
@@ -95,7 +93,7 @@ e. http://localhost:7071/api/dalleimage_generation - This URL can be used to tes
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_4.png)
 
-5. **Paste** the chat URL (copied from the visual studio terminal during step 1.3). 
+5. **Paste** the chat URL (copied from the Visual Studio terminal in step #3). 
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_5.png)
 
@@ -107,11 +105,11 @@ e. http://localhost:7071/api/dalleimage_generation - This URL can be used to tes
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_7.png)
 
-> **Note:**  Any function app can be tested in a similar way. Just the URL and payload body will change. Please find the sample payloads for the all function apps used the demo.
+> **Note:**  Any function app can be tested in a similar way by only changing the URL and payload body. Please find the sample payloads for the all function apps used in the demo.
 
-### Pdf Indexer
+### PDF Indexer
 
-This function app is used to index any pdf uploaded, into the number of pages the pdf consists of.
+This function app indexes an uploaded PDF into the number of pages the PDF consists of:
 
 *Path to build:* 'artifacts/binaries/func-pdf-indexer.zip'
 
@@ -143,7 +141,7 @@ http://localhost:7071/api/pdfindexer
 
 *Example Values:*
 
-* The below example is for uploading PDFs as "Knowledge Base."
+* The below example is for uploading the PDFs as "Knowledge Base."
 ```
     index_name: “prod-responsibleai-search”
     container_name: “knowledge-base-responsibleai”
@@ -158,9 +156,9 @@ http://localhost:7071/api/pdfindexer
     pdf: (str) --> path-to-your-pdffile
 ```
 
-**ENVIRONMENT VARIABLES (pdf indexer):**
+**ENVIRONMENT VARIABLES (PDF indexer):**
 
-* Here is the explanation of the Parameters:
+* Here is the explanation of the parameters:
 
 	| APP Setting  | Value  | Note |
 	|--------------|-------------|---------------|
@@ -170,7 +168,7 @@ http://localhost:7071/api/pdfindexer
 	| AZURE_STORAGE_ACCOUNT_NAME |  YOUR_AZURE_STORAGE_ACCOUNT_NAME | Your Azure Storage Account Name. Fetch it from the Azure Storage Account Name |
     | FORM_RECOGNIZER_KEY  | YOUR_FORM_RECOGNIZER_KEY         | Azure Form Recognizer Key, Fetch it from the Azure Portal | 
 
-> **Note:**  The below code snippet shows how you can test the environment variables by configuring them locally inside pdfindexer.py. Please add the name of the services and keys after the word “or” for each respective variable.
+> **Note:**  Using the code snippet below, you can test the environment variables by configuring them locally inside pdfindexer.py. Please add the name of the services and keys after the word “or” for the respective variables.
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_env_1.png)
 
@@ -182,7 +180,7 @@ This function app is used to search the response to any custom query related to 
 
 Extract the zip and continue with the steps below.
 
->**Note:** To test search horizontal, we need to have a knowledge base in the container and a search index, therefore it is mandatory to run pdf indexer before running search horizontal.
+>**Note:** To test search horizontal, we need to have a knowledge base in the container and a search index, therefore it is mandatory to run PDF indexer before running search horizontal.
 
 **Sample payload to test “search-horizontal” from the backend using Postman:**
 
@@ -245,7 +243,7 @@ http://localhost:7071/api/chat
 }
 ```
 
-**ENVIRONMENT VARIABLES (search horizontal):**
+**ENVIRONMENT VARIABLES (Search Horizontal):**
 
 * Here is the explanation of the Parameters:
 
@@ -262,7 +260,7 @@ http://localhost:7071/api/chat
     | AZURE_SEARCH_SERVICE_PROD_KEY        | YOUR_SEARCH_SERVICE_PROD_KEY      | Get Prod key from Azure Portal |
     |
 
-> **NOTE:**  The below code snippet shows how you can test the environment variables by configuring them locally inside “function_app.py”. Please add the name of the services and keys after the word “or” for each respective variable.
+> **NOTE:**  Using the below code snippet, you can test the environment variables by configuring them locally inside “function_app.py”. Please add the name of the services and keys after the word “or” for respective variable.
 
 ### Campaign Generation
 
@@ -433,7 +431,7 @@ http://localhost:7071/api/recommendFromImage_V2
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img_env_2.png)
 
-### Regenerate DALL E
+### Regenerate DALL-E
 
 This function app uses DALL-E to regenerate images according to the description passed in the body in accordance with the given images.
 
@@ -506,11 +504,11 @@ http://localhost:7071/api/dalleimage_generation
 
 ### Training the Knowledge Base
 
-1. Open the code in Visual Studio and Create an azure function using the V2 programming model in visual studio code and open the build for "func-pdf-indexer".
+1. Open the code in Visual Studio and Create an azure function using the V2 programming model in Visual Studio code and open the build for "func-pdf-indexer".
  
   ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_2.png)
 
-2. Run the function_app.py code in the visual studio using the command **“func start”** or **fn+F5** and **press** Enter key.
+2. Run the function_app.py code in the Visual Studio using the command **“func start”** or **fn+F5** and **press** Enter key.
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_2.png)
 
@@ -526,7 +524,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_4.png)
 
-5. **Paste** the chat URL (copied from the visual studio terminal during step 3). 
+5. **Paste** the chat URL (copied from the Visual Studio terminal during step 3). 
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_5.png)
 
@@ -544,7 +542,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
 9. Our Knowledge Base has been trained on "Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf".
 
-10. **Repeat** step #7, by replacing the "pdf" with the rest of the ResponsibleAI pdfs available in the package, to train the Knowledge Base completely.
+10. **Repeat** step #7, by replacing the "PDF" with the rest of the ResponsibleAI PDFs available in the package, to train the Knowledge Base completely.
 
 ### Webapp Scenario 1
 
@@ -566,7 +564,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
  
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined1.png)
 
-6. We will view the answer for the selected query. 
+6. **View** the answer for the selected query. 
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined21.png) 
 
@@ -590,7 +588,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
  
   ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined26.png)
 
-12. **View** the AI response. 
+12. **View** the AI generated response. 
  
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted ](media/predefined27.png)
 
@@ -832,8 +830,3 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
     ![image](media/scenario3_ui4.png)
 
 8. Now the web app will use the updated resources.
-
-
-
-
-

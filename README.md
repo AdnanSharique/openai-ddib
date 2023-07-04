@@ -1,197 +1,205 @@
 ![image](media/OpenAI_DDiB.png)
 
-# Azure OpenAI Dream Demo
+# Azure OpenAI Service DREAM Demo
 
 Azure OpenAI Service offers large-scale generative AI models with a deep understanding of language to enable new reasoning and comprehension capabilities for building cutting-edge applications. These models can be applied to a variety of use cases, such as writing assistance, code generation, and reasoning over data. You can also detect and mitigate harmful use of AI with built-in responsible AI and access enterprise-grade Azure security.
 
-In this demo, you will see the Azure OpenAI Service based assistant for Enterprise Data Demo, in action. This will be followed by a generated Social Media Campaign Recommendation demo using DALL-E 2, Florence and Azure OpenAI Service. And finally, you will see text summarization in a contact center scenario using Azure OpenAI with Speech Service.
+In this demo, you will see the Azure OpenAI Service based assistant for Enterprise Data in action. This will be followed by an AI - generated Social Media Campaign Recommendation demo using DALL-E 2, Florence and Azure OpenAI Service. And finally, you will see text summarization in a contact center scenario using Azure OpenAI with Speech Service.
+
+----
 
 ## Products and Technologies showcased:
 
-1.	Azure OpenAI Service
+**1.	Azure OpenAI Service**
 
-    •	Azure OpenAI Service provides REST API access to OpenAI's powerful language models. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation.
+- Azure OpenAI Service provides REST API access to OpenAI's powerful language models. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation.
     
-    •	The models used by Azure OpenAI use natural language instructions and examples provided during the generation call to identify the task being asked and skill required.
+- The models used by Azure OpenAI use natural language instructions and examples provided during the generation call to identify the task being asked and skill required.
     
-    •	With Azure OpenAI, customers get the security capabilities of Microsoft Azure while running the same models as OpenAI. Azure OpenAI offers private networking, regional availability, and responsible AI content filtering.
+- With Azure OpenAI, customers get the security capabilities of Microsoft Azure while running the same models as OpenAI. Azure OpenAI offers private networking, regional availability, and responsible AI content filtering.
 
-2.	DALL.E2
+**2.	DALL.E 2**
 
-    •	DALL·E 2 is an AI system that can create original, realistic images and art from a text description in natural language. It can combine concepts, attributes, and styles. 
+- DALL·E 2 is an AI system that can create original, realistic images and art from a text description in natural language. It can combine concepts, attributes, and styles. 
     
-    •	DALL·E 2 can make realistic edits to existing images from a natural language caption. It can add and remove elements while taking shadows, reflections, and textures into account. It can also create different variations of it inspired by the original.
+- DALL·E 2 can make realistic edits to existing images from a natural language caption. It can add and remove elements while taking shadows, reflections, and textures into account. It can also create different variations of it inspired by the original.
 
-3.	Project Florence (AI)
+**3.	Project Florence (AI)**
     
-    •	Project Florence is a Microsoft AI Cognitive Services initiative, to advance the state-of-the-art computer vision technologies and develop the next generation framework for visual recognition.
+- Project Florence is a Microsoft AI Cognitive Services initiative, to advance the state-of-the-art computer vision technologies and develop the next generation framework for visual recognition.
+
+----
+
+## Pre-requisites
+
+* [Azure Developer CLI](https://aka.ms/azure-dev/install)
+* [Python 3+](https://www.python.org/downloads/)
+  * **Important**: Python and the pip package manager must be in the path in Windows for the setup scripts to work.
+  * **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.
+* [Node.js](https://nodejs.org/en/download/)
+* [Git](https://git-scm.com/downloads)
+* [Powershell 7+ (pwsh)](https://github.com/powershell/powershell) - For Windows users only.
+  * **Important**: Ensure you can run `pwsh.exe` from a PowerShell command. If this fails, you likely need to upgrade PowerShell.
+* [Clone the repository to your local](https://dev.azure.com/daidemos/Microsoft%20Data%20and%20AI%20DREAM%20Demos%20and%20DDiB/_git/DreamDemoInABox?version=GBopen-ai-ddib&anchor=execution-through-webapp-scenario-1&path=/artifacts)
+* [Visual Studio Code](https://code.visualstudio.com/download)
+* [Azure Account](https://portal.azure.com/)
+* [Postman](https://www.postman.com/downloads/)
+
+
+>**NOTE:** Your Azure Account must have `Microsoft.Authorization/roleAssignments/write` permissions, such as [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner).  
+
+>**Note:** If you see any pop-up on VS Code to download extensions for executing the Python function apps, make sure you download and install it before executing the code.
+
+----
 
 ## Running this repo
 
-You have multiple options to execute this demo:
+There are two ways to execute this demo:
 
--   [Running everything locally in Python using Postman](#running-everything-locally-in-python-using-postman)
+-   [Method 1 - Executing the code on local machine in Python using Postman](#method-1-executing-the-code-on-local-machine-in-python-using-postman)
 
-    -   [Pdf Indexer](#pdf-indexer)
+    -   [PDF INDEXER](#pdf-indexer)
     -   [Search Horizontal](#search-horizontal)
     -   [Campaign Generation](#campaign-generation)
-    -   [Recommend Image](#recommend-image)
-    -   [Regenerate DALL E](#regenerate-dall-e)
+    -   [Recommend Images](#recommend-images)
+    -   [Regenerate Images with DALL-E 2](#regenerate-images-with-dall-e-2)
 
--   [Execution through Web App](#execution-through-web-app)
+-   [Method 2 - Executing the demo through demo web app](#method-2-executing-the-demo-through-demo-web-app)
 
-    -   [Scenario 1 : Azure OpenAI and Cognitive Search](#scenario-1-azure-openai-and-cognitive-search)
+    -   [Scenario 1 - Azure OpenAI Service and Azure Cognitive Search powered chatbot for Enterprise data](#scenario-1-azure-openai-service-and-azure-cognitive-search-powered-chatbot-for-enterprise-data)
+        -   [Steps to configure function app used in Scenario 1](#steps-to-configure-function-app-used-in-scenario-1)    
 
-        -   [Training the Knowledge Base](#training-the-knowledge-base)
-        -   [Webapp Scenario 1](#webapp-scenario-1)
-        -   [Configuring Function App for Scenario 1](#configuring-function-app-for-scenario-1)    
+    -   [Scenario 2 - Social Media Campaign and Product Recommendation](#scenario-2-social-media-campaign-and-product-recommendation)
+        -   [Steps to configure function app used in Scenario 2](#steps-to-configure-function-app-used-in-scenario-2) 
 
-    -   [Scenario 2 : Social Media Campaign and Product Recommendation](#scenario-2-social-media-campaign-and-product-recommendation)
-        -   [Webapp Scenario 2](#webapp-scenario-2)
-        -   [Configuring Function App for Scenario 2](#configuring-function-app-for-scenario-2) 
+    -   [Scenario 3 - Azure OpenAI with Speech Service](#scenario-3-azure-openai-with-speech-service)
+        -   [Steps to configure app service used in scenario 3](#steps-to-configure-app-service-used-in-scenario-3) 
 
-    -   [Scenario 3 : Azure OpenAI with Speech Service](#scenario-3-azure-openai-with-speech-service)
-        -   [Webapp Scenario 3](#webapp-scenario-3)
-        -   [Configuring Web App for Scenario 3](#configuring-web-app-for-scenario-3) 
+-   [Appendix](#appendix)
+    -   [Training the Knowledge Base using Postman and Python](#training-the-knowledge-base-using-postman-and-python)
+----
+
+## Method 1 - Executing the code on local machine in Python using Postman
+
+### Steps to execute the code on a local machine to test the function_app.py:
+
+1. **Start** VS Code on your loacal machine. The following screen will appear.
+    ![VS Code landing page](media/vs_code_landing_page.png)
+
+2. **Open** the locally cloned repository (mentioned in pre-requisites) in VS Code. You should be able to see all the necessary files as given in the screenshot below. Make sure that you extract all the zipped folder marked 3 in the screenshot. In the next steps, we will execute function app for all these folders one- by -one.
+    
+    ![Artifacts Folder Structure](media/folder_structure.png)
+
+----
+
+## PDF INDEXER
+This function-app indexes an uploaded PDF file into the number of pages in the PDF.
+
+### Steps to generate POST URL for 'PDF Indexer' function app:
+
+1. Under the **func-pdf-indexer** folder, select function_app.py.
+   
+    ![PDF Indexer explorer](media/select_function_app.png)
+
+2. **Open** a new terminal. In the next command line, **execute** the following code for the function to start.
+
+    ```
+    func start
+    ```
+
+    ![Start the function](media/func_start.png)
+
+3. Once the execution is complete, the function will give the following URLs to perform DELETE and INDEXING operations. **Copy** the 'pdfindexer' URL for further use.
+
+    ![URLs](media/urls_pdf_indexer.png)
 
 
-### Running everything locally in Python using Postman
+4. **Open** the Postman application, then **select** the "New" button to create a new request.
 
-*Prerequisites:*
-* Clone the repository to your local - [Link](https://dev.azure.com/daidemos/Microsoft%20Data%20and%20AI%20DREAM%20Demos%20and%20DDiB/_git/DreamDemoInABox?version=GBopen-ai-ddib&anchor=execution-through-webapp-scenario-1&path=/artifacts)
-* Visual Studio Code - [Download VS Code](https://code.visualstudio.com/download)
-* Azure Account - [Azure Portal](https://portal.azure.com/)
-* Postman - [Download Postman](https://www.postman.com/downloads/)
+    ![Select new request.](media/select_new_request.png)
+
+5. In the pop up window, **select** HTTP request.
+
+    ![Select HTTP request.](media/select_http.png)
+
+6.  In the new request page, **select** "POST" method from the dropdown as shown in the screenshot.
+
+   ![Select POST request.](media/select_post1.png)
+
+7. **Paste** the 'pdfindexer' URL copied earlier from the VS Code terminal in the text field next to POST. (Copied in step numner 3). 
+8. **Select** the Body tab to add other parameters.
+
+    ![Paste POST URL.](media/post_url.png)
+
+9. **Select** “form-data”.
+10. **Provide** the required key-value pair as given below.
+
+| Key | Value |
+|--------------|-------------|
+| index_name | prod-responsibleai-search |
+| container_name |knowledge-base-responsibleai |
+| pdf | [Select the PDF 'Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf' shared with you in the package] |
+
+11. Click **Send**.
+
+ ![Fill in form-data](media/form_body.png)
+
+12.  **View** the response.
+
+ ![Response for PDF Indexer](media/response_pdf.png)
 
 
-**General steps to locally run and test the function_app.py**
+ **ENVIRONMENT VARIABLES (PDF indexer):**
 
-1. **Open** the code in Visual Studio and Create an azure function using the V2 programming model in visual studio code and open the build.
+| APP Setting  | Value  | Note |
+|--------------|-------------|---------------|
+| AZURE_SEARCH_SERVICE_NAME |YOUR_AZURE_SEARCH_SERVICE_NAME   | Your Azure Cognitive Search service name. Fetch it from the Azure Portal.|
+| AZURE_SEARCH_KEY		    | YOUR_AZURE_SEARCH_KEY | Your Azure Cognitive Search key. Fetch it from the Azure Portal|
+| AZURE_STORAGE_ACCOUNT_KEY     | YOUR_AZURE_STORAGE_ACCOUNT_KEY   | Your Azure Storage Account Key. Fetch it from the Azure Portal |
+| AZURE_STORAGE_ACCOUNT_NAME |  YOUR_AZURE_STORAGE_ACCOUNT_NAME | Your Azure Storage Account Name. Fetch it from the Azure Storage Account Name |
+| FORM_RECOGNIZER_KEY  | YOUR_FORM_RECOGNIZER_KEY         | Azure Form Recognizer Key, Fetch it from the Azure Portal | 
 
-  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img11.png)
-
-2. **Run**  the "function_app.py" code in visual studio using the command **func start** or **fn+F5** and click **enter**.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_2.png)
-
-3. **Copy** the chat URL generated in the terminal (as indicated by the red box in this example). 
-
-```
-a. http://localhost:7071/api/chat  - This URL will be used to test "Search Horizontal Function App".
-
-b. http://localhost:7071/api/pdfindexer  - This URL will be used to test "Pdf Indexer Function App".
-
-c. http://localhost:7071/api/CampGen  - This URL can be used to test Campaign Generation Function APP
-
-d. http://localhost:7071/api/recommendFromImage_V2 - This URL can be used to test Recommendations from Images Function APP
-
-e. http://localhost:7071/api/dalleimage_generation - This URL can be used to test Generation of Images using Function APP 
-
-```
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_3.png)
-
-4. **Open** the Postman application, then **click** the "New" button to create a new "POST" request.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_4.png)
-
-5. **Paste** the chat URL (copied from the visual studio terminal during step 1.3). 
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_5.png)
-
-6. **Go to** the "Body" option , **select**  “raw”, and **enter** the "request body", then **click** on the “Send” button.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img22.png)
-
-7. **View** the response.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_search_7.png)
-
-> **Note:**  Any function app can be tested in a similar way. Just the URL and payload body will change. Please find the sample payloads for the all function apps used the demo.
-
-### Pdf Indexer
-
-This function app is used to index any pdf uploaded, into the number of pages the pdf consists of.
-
-*Path to build:* 'artifacts/binaries/func-pdf-indexer.zip'
-
-Extract the zip and continue with the steps below.
-
-**Sample payload to test “pdfindexer” from the backend using Postman:**
-
-*POST:* 
-``` 
-http://localhost:7071/api/pdfindexer 
-```
-
-*BODY:* form-data
-``` 
-{
-    index_name : (str) —> YOUR_INDEX_NAME,
-	container_name : (str) —> CONTAINER_NAME,
-	pdf : {FILE}  → YOUR_PDF
-}
-```
-
-*Return:*
-```
-{
-    "index_name": "YOUR_INDEX_NAME",
-    "container_name": "CONTAINER_NAME"
-}
-```
-
-*Example Values:*
-
-* The below example is for uploading PDFs as "Knowledge Base."
-```
-    index_name: “prod-responsibleai-search”
-    container_name: “knowledge-base-responsibleai”
-    pdf: (str) --> path-to-your-pdf-file
-```
-
-* The below example is for uploading any general PDFs from the user. Here, the index name and container name will be randomly generated by the webapp.
+> **Note:**  Using the code snippet below, you can test the environment variables by configuring them locally inside pdfindexer.py. Please add the name of the services and keys after the word “or” for the respective variables.
 
 ```
-    index_name: "46a0175b-1687428489218”
-    container_name: “4184f94f-1687428489218”
-    pdf: (str) --> path-to-your-pdffile
+search_service_name = os.environ.get("SEARCH_SERVICE_NAME") or "" 
+
+search_service_key = os.environ.get("SEARCH_SERVICE_KEY") or "" 
+
+storage_account_key = os.environ.get("STORAGE_ACCOUNT_KEY") or "" 
+
+storage_account_name = os.environ.get("STORAGE_ACCOUNT_NAME") or "" 
+
+form_recognizer_key = os.environ.get("FORM_RECOGNIZER_KEY") or "" 
+
+FormRecognizerService = os.environ.get("FormRecognizerService") or "" 
+
+form_recognizer_header = os.environ.get("form_recognizer_header") or "" 
 ```
 
-**ENVIRONMENT VARIABLES (pdf indexer):**
+>**Note:** The other function apps in this demo can be tested in a similar way by only changing the URL and form-data body in the POST request.
+ ----
+## Search Horizontal
 
-* Here is the explanation of the Parameters:
+ This function app is used to search the response to any custom query related to the pdf indexed by the function pdfindexer function app.4
+ ** Path to build:** 'artifacts/binaries/func-search-horizontal.zip' 
 
-	| APP Setting  | Value  | Note |
-	|--------------|-------------|---------------|
-	| AZURE_SEARCH_SERVICE_NAME |YOUR_AZURE_SEARCH_SERVICE_NAME   | Your Azure Cognitive Search service name. Fetch it from the Azure Portal.|
-	| AZURE_SEARCH_KEY		    | YOUR_AZURE_SEARCH_KEY | Your Azure Cognitive Search key. Fetch it from the Azure Portal|
-	| AZURE_STORAGE_ACCOUNT_KEY     | YOUR_AZURE_STORAGE_ACCOUNT_KEY   | Your Azure Storage Account Key. Fetch it from the Azure Portal |
-	| AZURE_STORAGE_ACCOUNT_NAME |  YOUR_AZURE_STORAGE_ACCOUNT_NAME | Your Azure Storage Account Name. Fetch it from the Azure Storage Account Name |
-    | FORM_RECOGNIZER_KEY  | YOUR_FORM_RECOGNIZER_KEY         | Azure Form Recognizer Key, Fetch it from the Azure Portal | 
+### Steps to generate POST URL for 'Search Horizontal' function app:
 
-> **Note:**  The below code snippet shows how you can test the environment variables by configuring them locally inside pdfindexer.py. Please add the name of the services and keys after the word “or” for each respective variable.
+1. Under the **func-search-horizontal** folder, **select** function_app.py.
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_env_1.png)
+![PDF Indexer explorer](media/select_function_app.png)
 
-### Search Horizontal
+2. **Repeat steps** from step number 2 to step number 12 for func-search-horizontal in the similar way as performed for PDF Indexer.
 
-This function app is used to search the response to any custom query related to the pdf indexed by the function pdfindexer function app.
+3. Use the following values for POSTMAN requests:
 
-*Path to build:* 'artifacts/binaries/func-search-horizontal.zip'
-
-Extract the zip and continue with the steps below.
-
->**Note:** To test search horizontal, we need to have a knowledge base in the container and a search index, therefore it is mandatory to run pdf indexer before running search horizontal.
-
-**Sample payload to test “search-horizontal” from the backend using Postman:**
-
-*POST:*
+**POST URL:**
 ```
 http://localhost:7071/api/chat
 ```
 
-*BODY:* form-data
+**BODY > raw:**
 ```
  {
     "approach": "rrr",
@@ -205,7 +213,7 @@ http://localhost:7071/api/chat
 }
 ```
 
-*Return:* 
+**Return:**
 ```
 {
     **"data_points"**: [],
@@ -214,7 +222,7 @@ http://localhost:7071/api/chat
 }
 ```
 
-**Example payload when searching from the knowledge base:**
+**Example raw-data when searching from the knowledge base:**
 ```
 {
     "approach": "rrr",
@@ -228,7 +236,7 @@ http://localhost:7071/api/chat
 }
 ```
 
-**Example payload when searching from any uploaded documents:**
+**Example raw-data when searching from any other uploaded documents:**
 ```
 {
     "history": 
@@ -245,37 +253,71 @@ http://localhost:7071/api/chat
 }
 ```
 
-**ENVIRONMENT VARIABLES (search horizontal):**
+**ENVIRONMENT VARIABLES (Search Horizontal):**
 
-* Here is the explanation of the Parameters:
+| APP Setting | Value         | Note |
+|---------|----------|-----------------------|
+| AZURE_SEARCH_SERVICE_NAME | YOUR_AZURE_SEARCH_SERVICE_NAME   | Your Azure Cognitive Search service name. Fetch it from the Azure Portal.|
+| AZURE_SEARCH_KEY	| YOUR_AZURE_SEARCH_KEY            | Your Azure Cognitive Search key. Fetch it from the Azure Portal|
+| AZURE_STORAGE_ACCOUNT_KEY   | YOUR_AZURE_STORAGE_ACCOUNT_KEY   | Your Azure Storage Account Key. Fetch it from the Azure Portal |
+| AZURE_STORAGE_ACCOUNT_NAME |  YOUR_AZURE_STORAGE_ACCOUNT_NAME | Your Azure Storage Account Name. Fetch it from the Azure Portal |
+| FORM_RECOGNIZER_KEY                   | YOUR_FORM_RECOGNIZER_KEY         | Azure Form Recognizer Key, Fetch it from the Azure Portal |
+| AZURE_OPENAI_GPT_DEPLOYMENT           | YOUR_AZURE_OPENAI_GPT_DEPLOYMENT | Get Azure openai GPT Deployment name from Azur Portal |
+| AZURE_OPENAI_KEY                      | YOUR_OPENAI_KEY                  | Get OpenAI key from Azure Portal |
+| AZURE_OPENAI_SERVICE                  | YOUR_OPENAI_SERVICE              | Get OpenAI service Name |
+| AZURE_SEARCH_SERVICE_PROD_KEY        | YOUR_SEARCH_SERVICE_PROD_KEY      | Get Prod key from Azure Portal |
+|
+> **NOTE:** Using the below code snippet, you can test the environment variables by configuring them locally inside “function_app.py”. Please add the name of the services and keys after the word “or” for respective variable.
 
-    | APP Setting | Value         | Note |
-	|---------|----------|-----------------------|
-	| AZURE_SEARCH_SERVICE_NAME | YOUR_AZURE_SEARCH_SERVICE_NAME   | Your Azure Cognitive Search service name. Fetch it from the Azure Portal.|
-	| AZURE_SEARCH_KEY	| YOUR_AZURE_SEARCH_KEY            | Your Azure Cognitive Search key. Fetch it from the Azure Portal|
-	| AZURE_STORAGE_ACCOUNT_KEY   | YOUR_AZURE_STORAGE_ACCOUNT_KEY   | Your Azure Storage Account Key. Fetch it from the Azure Portal |
-	| AZURE_STORAGE_ACCOUNT_NAME |  YOUR_AZURE_STORAGE_ACCOUNT_NAME | Your Azure Storage Account Name. Fetch it from the Azure Portal |
-    | FORM_RECOGNIZER_KEY                   | YOUR_FORM_RECOGNIZER_KEY         | Azure Form Recognizer Key, Fetch it from the Azure Portal |
-    | AZURE_OPENAI_GPT_DEPLOYMENT           | YOUR_AZURE_OPENAI_GPT_DEPLOYMENT | Get Azure openai GPT Deployment name from Azur Portal |
-    | AZURE_OPENAI_KEY                      | YOUR_OPENAI_KEY                  | Get OpenAI key from Azure Portal |
-    | AZURE_OPENAI_SERVICE                  | YOUR_OPENAI_SERVICE              | Get OpenAI service Name |
-    | AZURE_SEARCH_SERVICE_PROD_KEY        | YOUR_SEARCH_SERVICE_PROD_KEY      | Get Prod key from Azure Portal |
-    |
 
-> **NOTE:**  The below code snippet shows how you can test the environment variables by configuring them locally inside “function_app.py”. Please add the name of the services and keys after the word “or” for each respective variable.
+```
+AZURE_STORAGE_ACCOUNT = os.environ.get("AZURE_STORAGE_ACCOUNT") or "" 
 
-### Campaign Generation
+AZURE_STORAGE_CONTAINER = os.environ.get("AZURE_STORAGE_CONTAINER") or "" 
+
+AZURE_SEARCH_SERVICE = os.environ.get("AZURE_SEARCH_SERVICE") or "" 
+
+AZURE_SEARCH_INDEX = os.environ.get("AZURE_SEARCH_INDEX") or "" 
+
+AZURE_OPENAI_SERVICE = os.environ.get("AZURE_OPENAI_SERVICE") or "" 
+
+AZURE_OPENAI_GPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_GPT_DEPLOYMENT") or "" 
+
+AZURE_OPENAI_CHATGPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or "" 
+
+AZURE_OPENAI_SERVICE_KEY = os.environ.get("AZURE_OPENAI_SERVICE_KEY") or "" 
+
+AZURE_SEARCH_SERVICE_KEY = os.environ.get("AZURE_SEARCH_SERVICE_KEY") or "" 
+
+AZURE_SEARCH_SERVICE_PROD_KEY = os.environ.get("AZURE_SEARCH_SERVICE_PROD_KEY") or "" 
+
+AZURE_STORAGE_ACCOUNT_KEY = os.environ.get("AZURE_STORAGE_ACCOUNT_KEY") or "" 
+```
+   
+    
+----
+## Campaign Generation
 
 This function app is used to generate Instagram or Email campaigns related to the description passed in the body.
 
-**Sample payload to test “Campaign Generation” from the backend using Postman:**
+**Path to build:** 'artifacts/binaries/func-campaign-generation.zip'
 
-*POST:*
+### Steps to generate POST URL for 'Campaign Generation' function app:
+
+1. Under the **func-campaign-generation** folder, select function_app.py.
+
+![PDF Indexer explorer](media/select_function_app.png)
+
+2. **Repeat steps** from step number 2 to step number 12 for func-campaign-generation in the similar way as performed for PDF Indexer.
+
+3. Use the following values for POSTMAN requests.
+
+**POST URL:**
 ```
 http://localhost:7071/api/CampGen
 ```
 
-*BODY*: raw -> JSON
+**BODY**: raw -> JSON
 ```
 {
 	creative_factor : (Float) —> Value between 0 to 1,
@@ -284,7 +326,7 @@ http://localhost:7071/api/CampGen
 }
 ```
 
-*Return:* 
+**Return:** 
 ```
 {
     prompt: (str),
@@ -293,9 +335,11 @@ http://localhost:7071/api/CampGen
 }
 ```
 
-*Example Values:*
+**Example Values:**
 
-The below example is for Campaign Generation.
+The below example is for a new Instagram campaign generation.
+
+**BODY:**
 ```
 {
 "creative_factor": "0.8",
@@ -306,7 +350,7 @@ The below example is for Campaign Generation.
 }
 ```
 
-*Return:*
+**Return:**
 ```
 {
     "prompt": "Create instagram campaign on following info:Write an Instagram post for a company called Contoso. The post is for a promotion for a 50% discount on the launch of a new line of clothing. The new line focuses on minimalism. The post should include the following:\n1. A headline for the Instagram post.\n2. Choose words that communicate minimalism.\n3. A poem about how the line of clothing demonstrates minimalism.\n4. Include appropriate emojis in the post.\n5. Include relevant Hashtags.\n6. Post should contain at least 40 words.\nConsidering everything described above, give me an Instagram post with a post title, post content with appropriate hashtags and emojis. Close the post with a relevant poem as described above..",
@@ -319,30 +363,47 @@ The below example is for Campaign Generation.
 
 **ENVIRONMENT VARIABLES:**
 
-* Here is the explanation of the Parameters
 
-    | App Setting | Value  | Note |
-	| ----------- | ------ | ---- |
-	| AZURE_OPENAI_SERVICE_KEY| YOUR_AZURE_SEARCH_SERVICE_NAME | Your Azure Cognitive Search service name. Get it in the Azure Portal |
-    | AZURE_OPENAI_SERVICE | YOUR_OPENAI_SERVICE | Get openAI service Name |  
-    | AZURE_OPENAI_GPT_DEPLOYMENT | YOUR_AZURE_OPENAI_GPT_DEPLOYMENT | Get Azure openAI model deployment name |
+| App Setting | Value  | Note |
+| ----------- | ------ | ---- |
+| AZURE_OPENAI_SERVICE_KEY| YOUR_AZURE_SEARCH_SERVICE_NAME | Your Azure Cognitive Search service name. Get it in the Azure Portal |
+| AZURE_OPENAI_SERVICE | YOUR_OPENAI_SERVICE | Get openAI service Name |  
+| AZURE_OPENAI_GPT_DEPLOYMENT | YOUR_AZURE_OPENAI_GPT_DEPLOYMENT | Get Azure openAI model deployment name |
 
 > **Note:**  Inside "__init__.py", you can configure the environment variable locally to test as given in the below code snippet. Please add the name of the services and keys after “or” for the respective variables.
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img_env_1.png)
+ ```
+ AZURE_OPENAI_SERVICE_KEY = os.environ.get("AZURE_OPENAI_SERVICE_KEY") or "" 
 
-### Recommend Image
+AZURE_OPENAI_SERVICE = os.environ.get("AZURE_OPENAI_SERVICE") or "" 
+
+AZURE_OPENAI_GPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or "" 
+
+AZURE_OPENAI_CHATGPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or ""
+ ```
+ ----
+## Recommend Images
 
 This function app is used to recommend similar images with respect to the image passed in the body.
+** Path to build:** 'artifacts/binaries/func-recommend-image.zip' 
 
-**Sample payload to test “recommend from image” from the backend using Postman:**
+### Steps to generate POST URL for 'Recommend Images' fucntion app:
 
-*POST:* 
+1. Under the **func-recommend-image** folder, select function_app.py.
+
+![PDF Indexer explorer](media/select_function_app.png)
+
+2. **Repeat steps** from step number 2 to step number 12 for func-recommend-image in the similar way as performed for PDF Indexer.
+
+3. Use the following values for POSTMAN requests.
+
+**POST URL:**
+
 ```
 http://localhost:7071/api/recommendFromImage_V2
 ```
 
-*BODY:* raw -> JSON
+**BODY:** raw -> JSON
 ```
 {
 "image_url": (str)-->url,
@@ -350,7 +411,7 @@ http://localhost:7071/api/recommendFromImage_V2
 }
 ```
 
-*Return:* 
+**Return:** 
 ```
 {
     "productDescription": -->(str),
@@ -374,7 +435,7 @@ http://localhost:7071/api/recommendFromImage_V2
 }
 ```
 
-*Example payload for recommendations from image:*
+**Example raw-data for recommendations from image:**
 ```
 {
 "image_url":"https://i.ibb.co/SvSp7F7/minimalist.png",
@@ -382,7 +443,7 @@ http://localhost:7071/api/recommendFromImage_V2
 }
 ```
 
-*Return for Example Payload*
+**Return:**
 ```
 {
     "productDescription": "a pink and purple fabric",
@@ -413,45 +474,83 @@ http://localhost:7071/api/recommendFromImage_V2
 
 **ENVIRONMENT VARIABLES**
 
-* Here is the explanation of the Parameters
-    
-	| APP Setting | Value | Note |
-	|--------|------|------|
-	| CONTAINER_NAME   | YOUR_AZURE_CONTAINER_NAME  | Your Azure Container Name. Get it in the Azure Portal.       |
-	| OPENAI_API_KEY        | YOUR_AZURE_SEARCH_KEY             | Your Azure OpenAI Key             |
-    | CONGNITIVE_KEY     	| YOUR_COGNITIVE_KEY                | Your Azure Cognitive Key          |
-	| OPENAI_API_TYPE		| YOUR_OPENAI_TYPE                  | Your OpenAI Type                  |
-    | ENGINE                | YOUR_AZURE_ENGINE                 | Your Engine Name used                  
-    | STORAGE_ACCOUNT       | YOUR_AZURE_STORAGE_ACCOUNT        | Your Azure Storage Account Name. Get it in the Azure Portal      |
-    | STORAGE_CONTAINER     | YOUR_AZURE_STORAGE_CONTAINER      | Your Azure Storage Container Name. Get it in the Azure Portal      |    
-    | STORAGE_ACCOUNT_KEY   | YOUR_STORAGE_ACCOUNT_KEY          | Your Azure Storage Account Key. Get it in the Azure Portal      |
-    | COGNITIVE_SERVICE_API | YOUR_COGNITIVE_SERVICE_API        | Your Cognitive Service API. Get it in the Azure Portal      |
-    | CONNECT_STR           | YOUR_CONNECT_STRING  | Your Connect String. Get it in the Azure Portal      |
+
+| APP Setting | Value | Note |
+|--------|------|------|
+| CONTAINER_NAME   | YOUR_AZURE_CONTAINER_NAME  | Your Azure Container Name. Get it in the Azure Portal.       |
+| OPENAI_API_KEY        | YOUR_AZURE_SEARCH_KEY             | Your Azure OpenAI Key             |
+| CONGNITIVE_KEY     	| YOUR_COGNITIVE_KEY                | Your Azure Cognitive Key          |
+| OPENAI_API_TYPE		| YOUR_OPENAI_TYPE                  | Your OpenAI Type                  |
+| ENGINE                | YOUR_AZURE_ENGINE                 | Your Engine Name used                  
+| STORAGE_ACCOUNT       | YOUR_AZURE_STORAGE_ACCOUNT        | Your Azure Storage Account Name. Get it in the Azure Portal      |
+| STORAGE_CONTAINER     | YOUR_AZURE_STORAGE_CONTAINER      | Your Azure Storage Container Name. Get it in the Azure Portal      |    
+| STORAGE_ACCOUNT_KEY   | YOUR_STORAGE_ACCOUNT_KEY          | Your Azure Storage Account Key. Get it in the Azure Portal      |
+| COGNITIVE_SERVICE_API | YOUR_COGNITIVE_SERVICE_API        | Your Cognitive Service API. Get it in the Azure Portal      |
+| CONNECT_STR           | YOUR_CONNECT_STRING  | Your Connect String. Get it in the Azure Portal      |
  
 
 > **NOTE:**  Inside "function_app.py", you can configure the environment variable locally to test as given in the below code snippet. Please add the name of the services and keys after “or” for the respective variables.
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img_env_2.png)
+```
+container_name = os.environ.get("container_name") or "" 
 
-### Regenerate DALL E
+AZURE_OPENAI_KEY = os.environ.get("openai.api_key") or "" 
+
+AZURE_COGNITIVE_KEY = os.environ.get("cognitive_key") or "" 
+
+connect_str_key = os.environ.get("connect_str") or "" 
+
+AZURE_OPENAI_type = os.environ.get("openai.api_type") or "" 
+
+AZURE_OPENAI_BASE = os.environ.get("openai.api_base") or "" 
+
+openai.api_version = "2023-03-15-preview" 
+
+ENGINE = os.environ.get("ENGINE") or "" 
+
+STORAGE_ACCOUNT = os.environ.get("STORAGE_ACCOUNT") or "" 
+
+connect_str_key = os.environ.get("connect_str") or "" 
+
+STORAGE_CONTAINER = os.environ.get("STORAGE_CONTAINER") or "" 
+
+STORAGE_ACCOUNT_KEY = os.environ.get("STORAGE_ACCOUNT_KEY") or "" 
+
+COGNITIVE_SERVICE_API = os.environ.get("COGNITIVE_SERVICE_API") or "" 
+
+COGNITIVE_SERVICE = os.environ.get("COGNITIVE_SERVICE") or "" 
+```
+
+ ----
+ 
+ ## Regenerate Images with DALL-E 2
 
 This function app uses DALL-E to regenerate images according to the description passed in the body in accordance with the given images.
+** Path to build:** 'artifacts/binaries/func-regenerate-dalle.zip' 
 
-**Sample payload to test “dalle image generation” from the backend using Postman:**
+ ### Steps to generate POST URL for 'Regenerate images with DALL-E 2' function app:
 
-*POST:* 
+1. Under the **func-regenerate-dalle** folder, select function_app.py.
+
+![PDF Indexer explorer](media/select_function_app.png)
+
+2. Repeat steps from step number 2 to step number 12 for func-regenerate-dalle in the similar way as performed for PDF Indexer.
+
+3. Use the following values for POSTMAN requests.
+
+**POST URL:**
 ```
 http://localhost:7071/api/dalleimage_generation 
 ```
 
-*BODY:* raw--> JSON
+**BODY:** raw--> JSON
 ```
 {
 "dalle_prompt": (str) --> prompt for the image to be generated
 }
 ```
 
-*Return:* 
+**Return:**
 ```
 {
     "dalle_prompt": (str)--> prompt for gnerating image,
@@ -466,14 +565,14 @@ http://localhost:7071/api/dalleimage_generation
 }
 ```
 
-*Example payload for dalle images generation:*
+**Example raw-data for dalle images generation:**
 ```
 {
 "dalle_prompt":"Generate a realistic image of a convertible orange sports car on a road in a cloudy day"
 }
 ```
 
-*Return for Example Payload:*
+**Return:**
 ```
 {
     "dalle_prompt": "Generate a realistic image of a convertible orange sports car on a road in a cloudy day",
@@ -490,63 +589,52 @@ http://localhost:7071/api/dalleimage_generation
 
 **ENVIRONMENT VARIABLES:**
 
-    | APP Setting  | Value  | Note |
-	|----------|-----------|-----------|
-	| OPENAI_API_ENDPOINT | YOUR_OPENAI_API_ENDPOINT | Get your OpenAI API Endpoint   |
-    | OPENAI_KEY  | YOUR_OPENAI_KEY | Get OpenAI key from Azure Portal |
+Here is the explanation of the Parameters:
+
+| APP Setting  | Value  | Note |
+|----------|-----------|-----------|
+| OPENAI_API_ENDPOINT | YOUR_OPENAI_API_ENDPOINT | Get your OpenAI API Endpoint   |
+| OPENAI_KEY  | YOUR_OPENAI_KEY | Get OpenAI key from Azure Portal |
     
 > **NOTE:**  Inside image_generation.py, you can configure the environment variable locally to test as given in the below code snippet. Please add the name of the services and keys after “or” for the respective variables.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/img_env_3.png)
-
-
-### Execution through Web App
-
-### Scenario 1 : Azure OpenAI and Cognitive Search
-
-### Training the Knowledge Base
-
-1. Open the code in Visual Studio and Create an azure function using the V2 programming model in visual studio code and open the build for "func-pdf-indexer".
- 
-  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_2.png)
-
-2. Run the function_app.py code in the visual studio using the command **“func start”** or **fn+F5** and **press** Enter key.
-
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_2.png)
-
-3. **Copy** the "pdfindexer" URL generated in the terminal (as indicated by the red box in this example).
-
 ```
-http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer function app as well
+API_KEY = os.environ.get("OPENAI_API_KEY") or "" 
+
+API_ENDPOINT = os.environ.get("OPENAI_API_ENDPOINT") or "" 
 ```
+---
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_3.png)
+## Method 2: Executing the demo through demo web app
 
-4. **Open** the Postman application and **click** the "New" button to create a new "POST" request.
+>**Note:** It is important to execute all the steps in the "Setup-Document.md" before performing the following steps.
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_4.png)
+1. In the Azure Portal, under resource group **search** for "app-open-ai" and **click** on the app service.
 
-5. **Paste** the chat URL (copied from the visual studio terminal during step 3). 
+    ![image](media/scenario1_ui7.png)
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_5.png)
+2. **Scroll down** in the left pane, **click** on "Configuration", make sure you are under "Application settings" and then **click** on "Advanced edit".
 
-6. **Goto** to the body option, select  “raw”, **enter** the request body and **click** on the “Send” button.
+    ![image](media/scenario3_ui1.png)
 
-7. Make sure to provide index_name as "prod-responsibleai-search", container_name as "knowledge-base-responsibleai"and pdf as "Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf"
+3. In the Advanced Edit tab values of "Config__pdfUploadApi" and "Config__endPointURL" are used for the 1st Scenario which corresponds to function app of "pdf-indexer" and "search-horizontal" respectively.
 
->**Note:** Whatever value you are providing as "index_name" and "container_name", the same should be given in the "search-horizontal" function app AppSettings
+    ![image](media/webapp1.png)
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_6.png)
+4. In the Advanced Edit tab values of "Config__florenceAdApi", "Config__florenceDallEApi" and "Config__dalleRegenerateAPI" are used for the 2nd Scenario which corresponds to function app of "campaign-generator", "recommend-images" and "regenerate-dalle" respectively.
 
-8. **View** the Response.
+    ![image](media/webapp2.png)
 
- ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_pdf_7.png)
+5. In the Advanced Edit tab values of "Config__summarizeConversationAPI" and "Config__summarizeConversationAPIKey" are used for the 3rd Scenario which corresponds to "OpenaAI service endpoint" and "OpenaAI service key" respectively.
 
-9. Our Knowledge Base has been trained on "Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf".
+    ![image](media/webapp3.png)
 
-10. **Repeat** step #7, by replacing the "pdf" with the rest of the ResponsibleAI pdfs available in the package, to train the Knowledge Base completely.
+---
 
-### Webapp Scenario 1
+## Scenario 1 - Azure OpenAI Service and Azure Cognitive Search powered chatbot for Enterprise data
+
+This first scenario is a great example of how enterprises can use Azure OpenAI Service to quickly gain insights from their unstructured data.
+Spencer, Contoso’s new CEO, dreams of a search tool where he can simply ask a question related to a specific document or documents and receive a quick, trustworthy answer. 
+Let’s see how the power of Azure OpenAI Service and Azure Cognitive Search combine to create this solution.
 
 1. In the Azure Portal, under resource group **search** for "app-open-ai" and **click** on the app service.
 
@@ -566,7 +654,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
  
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined1.png)
 
-6. We will view the answer for the selected query. 
+6. **View** the answer for the selected query. 
 
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined21.png) 
 
@@ -590,12 +678,12 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
  
   ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/predefined26.png)
 
-12. **View** the AI response. 
+12. **View** the AI generated response. 
  
  ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted ](media/predefined27.png)
 
 
-### Configuring Function App for Scenario 1
+### Steps to configure function app used in Scenario 1:
 
 1. **Goto** Azure Portal, in the resource group search for "func-openai-search-horizontal" and **click** on the function app resource.
 
@@ -607,19 +695,19 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
 3. **Replace** the values as shown below according to your requirement.
 
-    |   name    |   value   |
-    | --------- | --------- |
-    | AZURE_OPENAI_SERVICE | Your openAI service name |
-    | AZURE_OPENAI_SERVICE_KEY | Your openAI service key |
-    | AZURE_OPENAI_GPT_TURBO_DEPLOYMENT | Your gpt-35-turbo model deployment name |
-    | AZURE_OPENAI_TEXT_DAVINCI_DEPLOYMENT | Your text-davinci-003 model deployment name |
-    | AZURE_SEARCH_SERVICE | Your search service name |
-    | AZURE_SEARCH_SERVICE_KEY | Your search service key |
-    | AZURE_SEARCH_SERVICE_PROD_KEY | Your search service key |
-    | AZURE_STORAGE_ACCOUNT | Your storage account name |
-    | AZURE_STORAGE_ACCOUNT_KEY | Your storage account key |
-    | AZURE_SEARCH_INDEX | Pretrained knowledge base index name |
-    | AZURE_STORAGE_CONTAINER | Pretrained knowledge base container name |
+|   name    |   value   |
+| --------- | --------- |
+| AZURE_OPENAI_SERVICE | Your openAI service name |
+| AZURE_OPENAI_SERVICE_KEY | Your openAI service key |
+| AZURE_OPENAI_GPT_TURBO_DEPLOYMENT | Your gpt-35-turbo model deployment name |
+| AZURE_OPENAI_TEXT_DAVINCI_DEPLOYMENT | Your text-davinci-003 model deployment name |
+| AZURE_SEARCH_SERVICE | Your search service name |
+| AZURE_SEARCH_SERVICE_KEY | Your search service key |
+| AZURE_SEARCH_SERVICE_PROD_KEY | Your search service key |
+| AZURE_STORAGE_ACCOUNT | Your storage account name |
+| AZURE_STORAGE_ACCOUNT_KEY | Your storage account key |
+| AZURE_SEARCH_INDEX | Pretrained knowledge base index name |
+| AZURE_STORAGE_CONTAINER | Pretrained knowledge base container name |
     
 4. **Click** on "OK" button.
 
@@ -639,9 +727,9 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
 8. Now the function app will use the updated resources.
 
-9. **Repeat** the steps from step #13 to #19 to customize "func-pdf-indexer".
+9. **Repeat** the steps from step number 13 to step number 19 to customize "func-pdf-indexer".
 
-> Table for "func-pdf-indexer"
+10. **Replace** the values as shown below:
 
 |   name    |   value   |
 | --------- | --------- |
@@ -652,117 +740,117 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 | STORAGE_ACCOUNT_NAME | Your storage account name |
 | STORAGE_ACCOUNT_KEY | Your storage account key |
 
+----
 
-### Scenario 2 : Social Media Campaign and Product Recommendation
+## Scenario 2 - Social Media Campaign and Product Recommendation
 
-### Webapp Scenario 2
+In this use case, we are using Azure OpenAI’s powerful language models to automatically generate campaign title and description from user prompt. Computer Vision and Florence-based AI models remove the background from the original image and extract dense captions. After that, we are generating abstract background images by providing a prompt using DALL.E2 in Azure OpenAI Service. And finally, we are merging the image which does not include the original background with the generated background to create the final result.
 
-1. In the Azure Portal, under resource group **search** for "app-open-ai" and **click** on the app service.
+**In the web app:**
 
-    ![image](media/scenario1_ui7.png)
-
-2. **Click** on "Browse".
-
-    ![image](media/scenario1_ui8.png)
-
-3. From the left navigation bar **click** on "Social Media Campaign & Product Recomendation".
+1. From the left navigation bar **click** on "Social Media Campaign & Product Recomendation".
 
     ![image](media/scenario2_ui1.png)
 
-4. **Click** on the "Dropdown" and **select** "Sports Car".
+2. **Click** on the "Dropdown" and **select** "Sports Car".
 
     ![image](media/scenario2_ui2.png)
 
-5. **Scroll down** and **click** on "Process".
+3. **Scroll down** and **click** on "Process".
 
     ![image](media/scenario2_ui3.png)
 
-6. The response 1 is an Instagram Campaign and response 2,3 are Recommended Image generated using ResponsibleAI.
+4. The response 1 is an Instagram Campaign and response 2,3 are Recommended Image generated using ResponsibleAI.
 
     ![image](media/scenario2_ui4.png)
 
-7. **Click** on "Show Prompt" at right top of the screen.
+5. **Click** on "Show Prompt" at right top of the screen.
 
     ![image](media/scenario2_ui5.png)
 
-8. The default prompt would be "Generate a realistic image of a convertible orange sports car on a road in a sunny day"
+6. The default prompt would be "Generate a realistic image of a convertible orange sports car on a road in a sunny day"
 
-9. **Click** on the "Edit" button.
+7. **Click** on the "Edit" button.
 
     ![image](media/scenario2_ui6.png)
 
-10. **Replace** the prompt with custom data for e.g. "sunny day" with "rainy day" and **click** on the "Send" button.
+8. **Replace** the prompt with custom data for e.g. "sunny day" with "rainy day" and **click** on the "Send" button.
 
     ![image](media/scenario2_ui7.png)
 
-11. The response is generated using "DALL-E 2".
+9. The response is generated using "DALL-E 2".
 
     ![image](media/scenario2_ui8.png)
 
-### Configuring Function App for Scenario 2
+### Steps to configure function app used in Scenario 2:
 
-1. **Goto** the Azure Portal, in the resource group, **search** for "func-campaign-generator" and **click** on the function app.
+1. **Go to** the Azure Portal.
+
+2. In the resource group search field, **type** "func-campaign-generator" and **select** the function app.
 
     ![image](media/scenario2_1.png)
 
-2. In the left pane, **scroll down** and **click** on "Configuration".
+3. In the left pane, **scroll down** and **click** on "Configuration".
 
     ![image](media/scenario2_2.png)
 
-3. Make sure you are on "Application settings" and **click** on "Advanced edit".
+4. Under "Application settings", **select** "Advanced edit".
 
     ![image](media/scenario2_3.png)
 
-4. **Replace** the values as shown below:
+5. **Replace** the values as shown below:
 
-    | name  |  value |
-    | ----- | ------ |
-    | AZURE_OPENAI_SERVICE | Your OpenAI service name |
-    | AZURE_OPENAI_SERVICE_KEY | Your OpenAI service key |
-    | AZURE_OPENAI_GPT_DEPLOYMENT | Your OpenAI service model deployment name |
-    | AZURE_OPENAI_CHATGPT_DEPLOYMENT | Your openAI model's engine Name |
+| Name  |  Value |
+| ----- | ------ |
+| AZURE_OPENAI_SERVICE | Your OpenAI service name |
+| AZURE_OPENAI_SERVICE_KEY | Your OpenAI service key |
+| AZURE_OPENAI_GPT_DEPLOYMENT | Your OpenAI service model deployment name |
+| AZURE_OPENAI_CHATGPT_DEPLOYMENT | Your openAI model's engine Name |
 
-5. **Click** on "OK" button.
+6. **Click** on "OK" button.
 
     ![image](media/scenario2_4.png)
 
-6. **Click** on "Save" button.
+7. **Click** on "Save" button.
 
     ![image](media/scenario2_5.png)
 
-7. **Click** on "Continue" button.
+8. **Click** on "Continue" button.
 
     ![image](media/scenario2_6.png)
 
-8. Wait for the changes to save, **scroll up** on the left pane, **click** on "Overview" and **click** on "Restart".
+9. Wait for the changes to save, **scroll up** on the left pane, **click** on "Overview" and **click** on "Restart".
 
     ![image](media/scenario2_7.png)
 
-9. Similarly we can make changes to all the values for different function apps for this scenario accordingly.
+10. Repeat the above steps for **func-recommend-images** and **func-regenerate-dalle** function apps. 
 
-10. Repeat step #12 to step #19 for other two function apps used in this scenario namely "func-recommend-images" and "func-regenerate-dalle", 
+**Replace** the values as shown below for **func-recommend-images** :
 
-    >Table for "func-recommend-images"
+| Name  |  Value |
+| ----- | ------ |
+| COGNITIVE_SERVICE_API | Your cognitive service endpoint |
+| cognitive_key | Your cognitive service key |
+| ENGINE | Your openAI service deployment model name |
+| OPENAI_API_ENDPOINT | Your openAI service endpoint |
+| OPENAI_API_KEY | Your openAI service key |
 
-    | name  |  value |
-    | ----- | ------ |
-    | COGNITIVE_SERVICE_API | Your cognitive service endpoint |
-    | cognitive_key | Your cognitive service key |
-    | ENGINE | Your openAI service deployment model name |
-    | OPENAI_API_ENDPOINT | Your openAI service endpoint |
-    | OPENAI_API_KEY | Your openAI service key |
-
-    >Table for "func-regenerate-dalle"
-
-    | name  |  value |
-    | ----- | ------ |
-    | OPENAI_API_ENDPOINT | Your openAI service endpoint |
-    | OPENAI_API_KEY | Your openAI service key |
+**Replace** the values as shown below for **func-regenerate-dalle** :
 
 
-### Scenario 3 : Azure OpenAI with Speech Service
+| Name  |  Value |
+| ----- | ------ |
+| OPENAI_API_ENDPOINT | Your openAI service endpoint |
+| OPENAI_API_KEY | Your openAI service key |
 
-### Webapp Scenario 3
+----
+
+## Scenario 3 - Azure OpenAI with Speech Service
+
+In this scenario, we will see a live conversation between a customer and a contact center agent being translated into machine readable format. After each question asked by the customer, Azure OpenAI Service offers intelligent and relevant suggested answers to the agent in near real-time! 
+We can track customer sentiment. Azure OpenAI can create a natural language summary of this conversation which can be reviewed for script improvement suggestions, or adding specific notes.  
+
+**In the web app:**
 
 1. From the left navigation bar, **hover** over "Azure OpenAI with Speech Service" and **click** on "Customer Conversation".
 
@@ -772,7 +860,7 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
 ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_callcentre_2.png)
 
-3. **Click** on "Summarize Conversation".
+3. Once the conversation is complete, **click** on "Summarize Conversation".
 
 ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_callcentre_3.png)
 
@@ -796,44 +884,125 @@ http://localhost:7071/api/pdfindexer  - This URL can be used to test pdfindexer 
 
 ![A portion of the Azure Portal home screen is displayed with the + Create a resource tile highlighted.](media/image_callcentre_8.png)
 
-### Configuring Web App for Scenario 3
+### Steps to configure app service used in scenario 3:
 
-1. In the Azure Portal, under resource group **search** for "app-open-ai" and **click** on the app service.
+1. **Go to** the Azure Portal.
+2. In the resource group search field **type** "app-open-ai" and **select** the app service.
 
     ![image](media/scenario1_ui7.png)
 
-2. **Scroll down** in the left pane, **click** on "Configuration", make sure you are under "Application settings" and then **click** on "Advanced edit".
+3. **Scroll down** in the left pane, **click** on "Configuration".
+4. Under "Application settings", **select** "Advanced edit".
 
     ![image](media/scenario3_ui1.png)
 
-3. **Replace** the values as shown below according to your requirement.
+5. **Replace** the values as shown below according to your requirement.
 
-    |   name    |   value   |
-    | --------- | --------- |
-    | Config__summarizeConversationAPI | Your openAI service name |
-    | Config__summarizeConversationAPIKey | Your openAI service key |
+|   Name    |   Value   |
+| --------- | --------- |
+| Config__summarizeConversationAPI | Your openAI service name |
+| Config__summarizeConversationAPIKey | Your openAI service key |
     
->**Note:** Value for Config__summarizeConversationAPI will be in the format "https://#OPENAI_SERVICE#.openai.azure.com/openai/deployments/text-davinci-003/completions?api-version=2022-12-01". You just need to replace "#OPENAI_SERVICE#" with Your openAI service name.
+>**Note:** Value for Config__summarizeConversationAPI will be in the format "https://#OPENAI_SERVICE#.openai.azure.com/openai/deployments/text-davinci-003/completions?api-version=2022-12-01".
+You just need to replace "#OPENAI_SERVICE#" with Your openAI service name.
 
-4. **Click** on "OK" button.
+6. **Click** on "OK" button.
 
     ![image](media/scenario3_ui2.png)
 
-5. **Click** on "Save".
+7. **Click** on "Save".
 
     ![image](media/scenario3_ui3.png)
 
-6. **Click** on "Continue".
+8. **Click** on "Continue".
 
     ![image](media/scenario1_ui5.png)
 
-7. Scroll up, **select** "Overview" and **click** on "Restart".
+9. Scroll up, **select** "Overview" and **click** on "Restart".
 
     ![image](media/scenario3_ui4.png)
 
-8. Now the web app will use the updated resources.
+10. Now the web app will use the updated resources.
+
+----
+## Appendix
+----
+
+### Training the Knowledge Base using Postman and Python
+
+To train the knowledge base for Scenario 1: "Azure OpenAI Service and Azure Cognitive Search powered chatbot for Enterprise data", we have used an automation script "openAISetup.ps1". However, the knowledge base can also be trained using the following steps:
+
+### Steps to train the Knowledge Base:
+
+1. **Start** VS Code on your loacal machine. The following screen will appear.
+    ![VS Code landing page](media/vs_code_landing_page.png)
+
+2. **Open** the locally cloned repository (mentioned in pre-requisites) in VS Code. You should be able to see all the necessary files as given in the screenshot below. Make sure that you extract all the zipped folder marked #3 in the screenshot. In the next steps, we will execute function app for all these folders one- by -one.
+    
+    ![Artifacts Folder Structure](media/folder_structure.png)
+
+### Steps to generate POST URL for 'PDF Indexer' function app:
+
+This function-app indexes an uploaded PDF file into the number of pages in the PDF.
+
+1. Under the **func-pdf-indexer** folder, select function_app.py.
+   
+    ![PDF Indexer explorer](media/select_function_app.png)
+
+2. **Open** a new terminal. In the next command line, **execute** the following code for the function to start.
+
+    ```
+    func start
+    ```
+
+    ![Start the function](media/func_start.png)
+
+3. Once the execution is complete, the function will give the following URLs to perform DELETE and INDEXING operations. **Copy** the 'pdfindexer' URL for further use.
+
+    ![URLs](media/urls_pdf_indexer.png)
 
 
+4. **Open** the Postman application, then **select** the "New" button to create a new request.
+
+    ![Select new request.](media/select_new_request.png)
+
+5. In the pop up window, **select** HTTP request.
+
+    ![Select HTTP request.](media/select_http.png)
+
+6.  In the new request page, **select** "POST" method from the dropdown as shown in the screenshot.
+
+   ![Select POST request.](media/select_post1.png)
+
+7. **Paste** the 'pdfindexer' URL copied earlier from the VS Code terminal in the text fiels next to POST. (Copied in step #18). 
+8. Select the Body tab to add other parameters.
+
+    ![Paste POST URL.](media/post_url.png)
+
+9. **Select** the "Body" option , **select**  “form-data”.
+10. Provide the required key-value pair as given below.
+
+| Key | Value |
+|--------------|-------------|
+| index_name | prod-responsibleai-search |
+| container_name |knowledge-base-responsibleai |
+| pdf | [Select the PDF 'Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf' shared with you in the package] |
+
+11. Click on **Send**.
+
+ ![Fill in form-data](media/form_body.png)
+
+12.  **View** the response.
+
+ ![Response for PDF Indexer](media/response_pdf.png)
+
+13. Our Knowledge Base has been trained on "Microsoft-Responsible-AI-Standard-v2-General-Requirements.pdf".
+
+14. **Repeat** step number 10, by replacing the "PDF" with the rest of the ResponsibleAI PDFs available in the package, to train the knowledge base completely.
+----
+----
+<p style="text-align: center;"><b>Demo End</p>
 
 
-
+----
+----

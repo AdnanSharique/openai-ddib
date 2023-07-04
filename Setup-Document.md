@@ -1,14 +1,19 @@
 # OpenAI DREAM Demo in a Box Setup Guide
 
 ## What is it?
-DREAM Demos in a Box (DDiB) are packaged Industry Scenario DREAM Demos with ARM templates (with a demo web app, Power BI reports, Synapse resources, OpenAI services, AML Notebooks etc.) that can be deployed in a customer’s subscription using the CAPE tool in a few hours.  Partners can also deploy DREAM Demos in their own subscriptions using DDiB.
+DREAM Demos in a Box (DDiB) are packaged Industry Scenario DREAM Demos with ARM templates (with a demo web app, Power BI reports, Synapse resources, Azure OpenAI services, AML Notebooks etc.) that can be deployed in a customer’s subscription using the CAPE tool in a few hours.  Partners can also deploy DREAM Demos in their own subscriptions using DDiB.
 
 ## Objective & Intent
 Partners can deploy DREAM Demos in their own Azure subscriptions and show live demos to customers. 
-In partnership with Microsoft sellers, partners can deploy the Industry scenario DREAM demos into customer subscriptions. 
+In partnership with Microsoft sellers, partners can deploy the industry scenario DREAM demos into customer subscriptions. 
 Customers can play,  get hands-on experience navigating through the demo environment in their own subscription and show to their own stakeholders.
 
-**Before You Begin**
+## Getting Started
+
+> **IMPORTANT:** In order to deploy and run this example, you'll need an **Azure subscription with access enabled for the Azure OpenAI service**. You can request access [here](https://aka.ms/oaiapply). You can also visit [here](https://azure.microsoft.com/free/cognitive-search/) to get some free Azure credits to get you started.
+
+> **AZURE RESOURCE COSTS** by default this sample will create Azure App Service and Azure Cognitive Search resources that have a monthly cost, as well as Form Recognizer resource that has cost per document page. 
+
 
 ## :exclamation:IMPORTANT NOTES:  
 
@@ -22,7 +27,7 @@ Customers can play,  get hands-on experience navigating through the demo environ
    
 # Copyright - 2023
 
-© 2021 Microsoft Corporation. All rights reserved.   
+© 2023 Microsoft Corporation. All rights reserved.   
 
 By using this demo/lab, you agree to the following terms: 
 
@@ -47,7 +52,7 @@ THIS DEMO/LAB PROVIDES CERTAIN SOFTWARE TECHNOLOGY/PRODUCT FEATURES AND FUNCTION
 
 ## Requirements
 
-* An Azure Account with the ability to create an Azure OpenAI Service.
+* An Azure account with the ability to create Azure OpenAI Service.
 * A Power BI Pro or Premium account to host Power BI reports.
 * Make sure you are the Power BI administrator for your account and service principal access is enabled on your Power BI tenant.
 * Make sure the following resource providers are registered with your Azure Subscription.
@@ -58,11 +63,11 @@ THIS DEMO/LAB PROVIDES CERTAIN SOFTWARE TECHNOLOGY/PRODUCT FEATURES AND FUNCTION
 * You can run only one deployment at any point in time and need to wait for its completion. You should not run multiple deployments in parallel as that will cause deployment failures.
 * Select a region where the desired Azure Services are available. If certain services are not available, deployment may fail. See [Azure Services Global Availability](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=all) for understanding target service availability. (consider the region availability for Synapse workspace, Iot Central and cognitive services while choosing a location)
 * Do not use any special characters or uppercase letters in the environment code. Also, do not re-use your environment code.
-* In this Accelerator we have converted Real-time reports into static reports for the ease of users but have covered entire process to configure Realtime dataset. Using those Realtime dataset you can create Realtime reports.
+* In this Accelerator we have converted real-time reports into static reports for the ease of users but have covered entire process to configure real-time dataset. Using those real-time dataset you can create real-time reports.
 * Please ensure that you select the correct resource group name. We have given a sample name which may need to be changed should any resource group with the same name already exist in your subscription.
 * The audience for this document is CSAs and GBBs.
 * Please log in to Azure and Power BI using the same credentials.
-* Once the resources have been setup, please ensure that your AD user and synapse workspace have “Storage Blob Data Owner” role assigned on storage account name starting with “stopenai...”. You need to contact AD admin to get this done.
+* Once the resources have been set up, please ensure that your AD user and Synapse workspace have “Storage Blob Data Owner” role assigned on storage account name starting with “stopenai...”. You need to contact AD admin to get this done.
 * Please review the [License Agreement](https://github.com/microsoft/Azure-Analytics-and-AI-Engagement/blob/main/CDP-Retail/license.md) before proceeding.
 
 ## Before starting
@@ -83,7 +88,7 @@ THIS DEMO/LAB PROVIDES CERTAIN SOFTWARE TECHNOLOGY/PRODUCT FEATURES AND FUNCTION
 
 	![A portion of the Azure Portal home screen is displayed with Create Resource Group tile](media/resource-group-2.png)
 	
-5. On the 'Create a resource group' screen, **select** your desired Subscription. For Resource group, **type** 'rg-openai-ddib'. 
+5. On the 'Create a resource group' screen, **select** your desired subscription. For Resource group, **type** 'rg-openai-ddib'. 
 
 6. **Select** your desired region.
 
@@ -107,29 +112,29 @@ THIS DEMO/LAB PROVIDES CERTAIN SOFTWARE TECHNOLOGY/PRODUCT FEATURES AND FUNCTION
 
 	> **Note:** Use the same credentials for Power BI which you will be using for the Azure account.
 
-3. In Power BI service **Click** on 'Workspaces'.
+3. In Power BI service, **click** on 'Workspaces'.
 
-4. Then **click** on the 'Create a workspace' tab.
+4. Then, **click** on the 'Create a workspace' tab.
 
 	![Create Power BI Workspace.](media/power-bi-2.png)
 
-	> **Note:** Please create a Workspace by the name "DDiB-OpenAI".
+	> **Note:** Please create a workspace by the name "DDiB-OpenAI".
 
-5. **Copy** the Workspace GUID or ID. You can get this by browsing to [https://app.powerbi.com/](https://app.powerbi.com/), selecting the workspace, and then copying the GUID 	from the address URL.
+5. **Copy** the workspace GUID or ID. You can get this by browsing to [https://app.powerbi.com/](https://app.powerbi.com/), selecting the workspace, and then copying the GUID from the address URL.
 
 6. **Paste** the GUID in a notepad for future reference.
 
-	![Give the name and description for the new workspace.](media/power-bi-3.png)
+	![Give a name and description for the new workspace.](media/power-bi-3.png)
 
 	> **Note:** This workspace ID will be used during the ARM template deployment.	
 
-### Task 3: Deploy the ARM Template
+### Task 3: Deploy the ARM Template.
 
 1. **Open** this link in a new tab of the same browser that you are currently in: 
 	
 	<a href='https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FAzure-Analytics-and-AI-Engagement%2Fhealthcare2%2Fhealthcare2%2FmainTemplate.json' target='_blank'><img src='http://azuredeploy.net/deploybutton.png' /></a>
 
-2. On the Custom deployment form, **select** your desired Subscription.
+2. On the Custom deployment form, **select** your desired subscription.
 
 3. **Select** the resource group name **rg-openai-ddib** which you created in [Task 1](#task-1-create-a-resource-group-in-azure).
 
@@ -173,7 +178,7 @@ THIS DEMO/LAB PROVIDES CERTAIN SOFTWARE TECHNOLOGY/PRODUCT FEATURES AND FUNCTION
 
 	> **Note:** If you are creating a new storage account, give it a unique name with no special characters or uppercase letters.
 
-4. In the Azure Cloud Shell window, ensure the PowerShell environment is selected and **enter** the following command to clone the repository files.
+4. In the Azure Cloud Shell window, ensure the PowerShell environment is selected and **execute** the following command to clone the repository files.
 
 ```
 git clone -b openai --depth 1 --single-branch https://github.com/microsoft/Azure-Analytics-and-AI-Engagement.git openai
@@ -181,7 +186,11 @@ git clone -b openai --depth 1 --single-branch https://github.com/microsoft/Azure
 
 ![Git Clone Command to Pull Down the demo Repository.](media/cloud-shell-4.png)
 	
-> **Note:** If you get File already exist error, please execute the following command: rm openai -r -f to delete existing clone.
+> **Note:** If you get 'File already exists' error, please execute the following command to delete existing clone: 
+
+```
+rm openai -r -f 
+```
 
 > **Note**: When executing scripts, it is important to let them run to completion. Some tasks may take longer than others to run. When a script completes execution, you will be returned to a command prompt. 
 
@@ -228,7 +237,7 @@ cd ./openai/openai
 
 	![Authentication done.](media/cloud-shell-21.png)
 
-15. Now you will be prompted to select subscription if you have multiple subscription assigned to the user you used for device login.
+15. Now you will be prompted to select subscription if you have multiple subscriptions assigned to the user you used for device login.
 
     ![Close the browser tab.](media/select-sub.png)
 	
